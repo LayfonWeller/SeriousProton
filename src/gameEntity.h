@@ -32,9 +32,9 @@ public:
 
     virtual ~GameEntity();
 
-    virtual void update(float delta);
+    virtual void update(float delta) override;
 
-    virtual void render(sf::RenderTarget& window);
+    virtual void render(sf::RenderTarget& window) override;
 
     virtual bool takeDamage(sf::Vector2f position, int damageType, int damage_amount);
 };

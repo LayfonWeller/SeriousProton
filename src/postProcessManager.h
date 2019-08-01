@@ -22,7 +22,7 @@ public:
     PostProcessor(string name, RenderChain* chain);
     virtual ~PostProcessor() {}
     
-    virtual void render(sf::RenderTarget& window);
+    virtual void render(sf::RenderTarget& window) override;
     
     void setUniform(string name, float value);
     

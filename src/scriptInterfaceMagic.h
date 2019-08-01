@@ -273,6 +273,26 @@ template<class T, class R> struct call<T, R(T::*)() >
     }
 };
 
+template<class T, class R> struct call<T, R(T::*)() const >
+{
+    typedef R(T::*FuncProto)() const;
+    
+    static int function(lua_State* L)
+    {
+        FuncProto* func_ptr = reinterpret_cast<FuncProto*>(lua_touserdata(L, lua_upvalueindex (1)));
+        FuncProto func = *func_ptr;
+        T* obj = NULL;
+        int idx = 1;
+        convert<T*>::param(L, idx, obj);
+        if (obj)
+        {
+            R r = (obj->*func)();
+            return convert<R>::returnType(L, r);
+        }
+        return 0;
+    }
+};
+
 class ScriptCallback;
 class ScriptObject;
 template<class T> struct call<T, ScriptCallback T::* >
@@ -367,6 +387,28 @@ template<class T, typename P1> struct call<T, void(T::*)(P1) >
 template<class T, typename R, typename P1> struct call<T, R(T::*)(P1) >
 {
     typedef R(T::*FuncProto)(P1 p1);
+    
+    static int function(lua_State* L)
+    {
+        FuncProto* func_ptr = reinterpret_cast<FuncProto*>(lua_touserdata(L, lua_upvalueindex (1)));
+        FuncProto func = *func_ptr;
+        P1 p1;
+        T* obj = NULL;
+        int idx = 1;
+        convert<T*>::param(L, idx, obj);
+        convert<P1>::param(L, idx, p1);
+        if (obj)
+        {
+            R r = (obj->*func)(p1);
+            return convert<R>::returnType(L, r);
+        }
+        return 0;
+    }
+};
+
+template<class T, typename R, typename P1> struct call<T, R(T::*)(P1) const>
+{
+    typedef R(T::*FuncProto)(P1 p1) const;
     
     static int function(lua_State* L)
     {

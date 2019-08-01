@@ -153,8 +153,8 @@ void Engine::runMainLoop()
 void Engine::handleEvent(sf::Event& event)
 {
     // Window closed: exit
-    if ((event.type == sf::Event::Closed))
-        running = false;
+    if (event.type == sf::Event::Closed)
+      running = false;
     if (event.type == sf::Event::GainedFocus)
         windowManager->windowHasFocus = true;
     if (event.type == sf::Event::LostFocus)

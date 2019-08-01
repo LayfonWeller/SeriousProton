@@ -33,7 +33,7 @@ class HttpRequestFileHandler : public HttpRequestHandler
 public:
     HttpRequestFileHandler(string base_path) : base_path(base_path) {}
 
-    virtual bool handleRequest(HttpRequest& request, HttpServerConnection* connection);
+    virtual bool handleRequest(HttpRequest& request, HttpServerConnection* connection) override;
 };
 
 class HttpServerConnection: public sf::NonCopyable
@@ -83,7 +83,7 @@ public:
 
     void addHandler(HttpRequestHandler* handler) { handlers.push_back(handler); }
 
-    virtual void update(float delta);
+    virtual void update(float delta) override;
 
     friend class HttpServerConnection;
 };

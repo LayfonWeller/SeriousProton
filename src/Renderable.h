@@ -26,7 +26,7 @@ public:
     RenderLayer();
     RenderLayer(RenderChain* link);
     
-    virtual void render(sf::RenderTarget& window);
+    virtual void render(sf::RenderTarget& window) override;
     
     friend class Renderable;
 };
