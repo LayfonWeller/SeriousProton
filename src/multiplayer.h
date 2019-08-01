@@ -245,10 +245,8 @@ public:
     MultiplayerClassListItem* next;
 
     MultiplayerClassListItem(string name, CreateMultiplayerObjectFunction func)
+    : name(std::move(name)), func(func), next(multiplayerClassListStart)
     {
-        this->name = name;
-        this->func = func;
-        this->next = multiplayerClassListStart;
         multiplayerClassListStart = this;
     }
 };

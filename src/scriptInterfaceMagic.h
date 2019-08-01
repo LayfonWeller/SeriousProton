@@ -29,12 +29,12 @@ public:
     std::vector<ScriptClassInfo*> child_classes;
     
     ScriptClassInfo(string class_name, string base_class_name, registerObjectFunction register_function, checkObjectType check_function)
+    : class_name(std::move(class_name)),
+      base_class_name(std::move(base_class_name)),
+      register_function(register_function),
+      check_function(check_function),
+      next(scriptClassInfoList)
     {
-        this->class_name = class_name;
-        this->base_class_name = base_class_name;
-        this->register_function = register_function;
-        this->check_function = check_function;
-        this->next = scriptClassInfoList;
         scriptClassInfoList = this;
     }
 };

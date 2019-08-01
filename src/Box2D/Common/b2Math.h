@@ -188,9 +188,8 @@ struct b2Mat22
 
 	/// Construct this matrix using columns.
 	b2Mat22(const b2Vec2& c1, const b2Vec2& c2)
+	: ex(c1), ey(c2)
 	{
-		ex = c1;
-		ey = c2;
 	}
 
 	/// Construct this matrix using scalars.
@@ -262,10 +261,8 @@ struct b2Mat33
 
 	/// Construct this matrix using columns.
 	b2Mat33(const b2Vec3& c1, const b2Vec3& c2, const b2Vec3& c3)
+	: ex(c1), ey(c2), ez(c3)
 	{
-		ex = c1;
-		ey = c2;
-		ez = c3;
 	}
 
 	/// Set this matrix to all zeros.
