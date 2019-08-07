@@ -140,7 +140,7 @@ float SoundManager::getSoundPitch(int index)
     }
 }
 
-int SoundManager::playSound(string name, float pitch, float volume, bool loop)
+int SoundManager::playSound(const string& name, float pitch, float volume, bool loop)
 {
     sf::SoundBuffer* data = soundMap[name];
     if (data == NULL)
@@ -164,7 +164,7 @@ void SoundManager::disablePositionalSound()
     positional_sound_enabled = false;
 }
 
-int SoundManager::playSound(string name, sf::Vector2f position, float min_distance, float attenuation, float pitch, float volume, bool loop)
+int SoundManager::playSound(const string& name, sf::Vector2f position, float min_distance, float attenuation, float pitch, float volume, bool loop)
 {
     if (!positional_sound_enabled)
         return -1;

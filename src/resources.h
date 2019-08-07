@@ -19,8 +19,8 @@ protected:
 public:
     ResourceProvider();
     
-    virtual P<ResourceStream> getResourceStream(const string filename) = 0;
-    virtual std::vector<string> findResources(const string searchPattern) = 0;
+    virtual P<ResourceStream> getResourceStream(const string& filename) = 0;
+    virtual std::vector<string> findResources(const string& searchPattern) = 0;
 };
 
 class DirectoryResourceProvider : public ResourceProvider
@@ -29,13 +29,13 @@ class DirectoryResourceProvider : public ResourceProvider
 public:
     DirectoryResourceProvider(const string basepath);
     
-    virtual P<ResourceStream> getResourceStream(const string filename) override;
-    virtual std::vector<string> findResources(const string searchPattern) override;
+    virtual P<ResourceStream> getResourceStream(const string& filename) override;
+    virtual std::vector<string> findResources(const string& searchPattern) override;
 private:
-    void findResources(std::vector<string>& paths, const string basepath, const string searchPattern);
+    void findResources(std::vector<string>& paths, const string& basepath, const string& searchPattern);
 };
 
-P<ResourceStream> getResourceStream(const string filename);
-std::vector<string> findResources(const string searchPattern);
+P<ResourceStream> getResourceStream(const string& filename);
+std::vector<string> findResources(const string& searchPattern);
 
 #endif//RESOURCELOADER_H

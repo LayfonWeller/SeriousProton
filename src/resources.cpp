@@ -81,11 +81,11 @@ public:
 
 
 DirectoryResourceProvider::DirectoryResourceProvider(string basepath)
-: basepath(basepath)
+: basepath(std::move(basepath))
 {
 }
 
-P<ResourceStream> DirectoryResourceProvider::getResourceStream(string filename)
+P<ResourceStream> DirectoryResourceProvider::getResourceStream(const string& filename)
 {
     P<FileResourceStream> stream = new FileResourceStream(basepath + filename);
     if (stream->isOpen())
@@ -93,14 +93,14 @@ P<ResourceStream> DirectoryResourceProvider::getResourceStream(string filename)
     return nullptr;
 }
 
-std::vector<string> DirectoryResourceProvider::findResources(string searchPattern)
+std::vector<string> DirectoryResourceProvider::findResources(const string& searchPattern)
 {
     std::vector<string> found_files;
     findResources(found_files, "", searchPattern);
     return found_files;
 }
 
-void DirectoryResourceProvider::findResources(std::vector<string>& found_files, const string path, const string searchPattern)
+void DirectoryResourceProvider::findResources(std::vector<string>& found_files, const string& path, const string& searchPattern)
 {
     DIR* dir = opendir((basepath + path).c_str());
     if (!dir)
@@ -119,7 +119,7 @@ void DirectoryResourceProvider::findResources(std::vector<string>& found_files, 
     closedir(dir);
 }
 
-P<ResourceStream> getResourceStream(string filename)
+P<ResourceStream> getResourceStream(const string& filename)
 {
     foreach(ResourceProvider, rp, resourceProviders)
     {
@@ -130,7 +130,7 @@ P<ResourceStream> getResourceStream(string filename)
     return NULL;
 }
 
-std::vector<string> findResources(string searchPattern)
+std::vector<string> findResources(const string& searchPattern)
 {
     std::vector<string> foundFiles;
     foreach(ResourceProvider, rp, resourceProviders)

@@ -47,7 +47,7 @@ Engine::~Engine()
 
 void Engine::registerObject(string name, P<PObject> obj)
 {
-    objectMap[name] = obj;
+    objectMap[std::move(name)] = obj;
 }
 
 P<PObject> Engine::getObject(string name)
