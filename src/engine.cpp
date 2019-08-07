@@ -52,8 +52,9 @@ void Engine::registerObject(string name, P<PObject> obj)
 
 P<PObject> Engine::getObject(string name)
 {
+    // TODO FIXME THIS IS SO WRONG..
     if (!objectMap[name])
-        return NULL;
+        return nullptr;
     return objectMap[name];
 }
 

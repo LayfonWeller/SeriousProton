@@ -10,7 +10,7 @@
 /**
     P<T> is a reference counting pointer class. This class keeps track to the amount of P<T> pointers pointing to a Pobject.
     If no more P<T> pointers point to a Pobject, the object is deleted. The object also has a destroyed flag, if the destroyed
-    flag is set, the pointers pointing towards it act as NULL pointers from that point on.
+    flag is set, the pointers pointing towards it act as nullptr pointers from that point on.
     NOTE: This does not free circular references.
 
     The Pobject is not copyable and should not be created on the stack, only on the heap (so with "new")
@@ -97,16 +97,16 @@ private:
 public:
     P()
     {
-        ptr = NULL;
+        ptr = nullptr;
     }
     P(const P& p)
     {
-        ptr = NULL;
+        ptr = nullptr;
         set(p.ptr);
     }
     P(T* p)
     {
-        ptr = NULL;
+        ptr = nullptr;
         set(p);
     }
 
@@ -153,7 +153,7 @@ public:
     explicit operator bool()
     {
         check_release();
-        return ptr != NULL;
+        return ptr != nullptr;
     }
 
     template<class T2> operator P<T2>()
@@ -164,7 +164,7 @@ public:
 protected:
     void check_release()
     {
-        if (ptr != NULL && ptr->_destroyed_flag)
+        if (ptr != nullptr && ptr->_destroyed_flag)
             release();
     }
 
@@ -175,14 +175,14 @@ protected:
             ptr->refCount--;
             if (ptr->refCount == 0)
                 delete ptr;
-            ptr = NULL;
+            ptr = nullptr;
         }
     }
     void set(T* p)
     {
         release();
         ptr = p;
-        if (ptr != NULL)
+        if (ptr != nullptr)
             ptr->refCount ++;
     }
 };
@@ -231,7 +231,7 @@ private:
     unsigned int index;
 public:
     Piterator(PVector<T>& list)
-    : P<T>(NULL), list(list), index(0)
+    : P<T>(nullptr), list(list), index(0)
     {
        next();
     }
@@ -242,7 +242,7 @@ public:
         {
             if (index >= list.size())
             {
-                P<T>::set(NULL);
+                P<T>::set(nullptr);
                 return;
             }
             P<T>::set(*list[index]);
