@@ -20,7 +20,7 @@ private:
     };
     Mode mode;
     int32_t samplerate;
-    float trigger_level;
+    // float trigger_level;
     sf::Keyboard::Key activation_key;
     sf::Clock record_start_time;
     sf::Mutex sample_buffer_mutex;
